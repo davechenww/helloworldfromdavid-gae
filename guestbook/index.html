@@ -1,0 +1,64 @@
+{% extends "../templates/base.html" %}
+
+{% block title %}
+GuestBook | "Hello, World!" from David
+{% endblock %}
+
+{% block header_content %}
+<h1>GuestBook</h1> 
+{% endblock %}
+
+{% block content_content %}
+<form action="sign/" method="post">
+    <div data-role="fieldcontain">
+        <label for="content">
+            {% if current_user %}Hello {{ current_user.nickname }},{% endif %}
+            Say something to me:
+        </label>
+        <textarea name="content" rows="3" cols="60"></textarea>
+        <input type="submit" value="Sign Guestbook" data-inline="true">
+    </div>
+</form>
+
+<ul data-role="listview" role="listbox">
+    <li data-role="list-divider" role="heading" tabindex="0">
+    Latest
+    </li>
+    {% for greeting in latest_greetings %}
+    <li role="option" tabindex="-1" data-theme="b">
+    <div class="ui-btn-text">
+        <p class="ui-li-aside ui-li-desc">{{ greeting.date|timesince }} ago</p>
+        <h3 class="ui-li-heading">
+            {% if greeting.author %}{{ greeting.author.nickname }}{% else %}Anonymous{% endif %}
+        </h3>
+        <p class="ui-li-desc">{{ greeting.content|escape }}</p>
+    </div>
+    </li>
+    {% endfor %}
+    {% if more_greetings %}
+    <li data-role="list-divider" role="heading" tabindex="0" id="more">
+    More
+    </li>
+    {% for greeting in more_greetings %}
+    <li role="option" tabindex="-1" data-theme="b" id="greetings">
+    <div class="ui-btn-text">
+        <p class="ui-li-aside ui-li-desc">{{ greeting.date|timesince }} ago</p>
+        <h3 class="ui-li-heading">
+            {% if greeting.author %}{{ greeting.author.nickname }}{% else %}Anonymous{% endif %}
+        </h3>
+        <p class="ui-li-desc">{{ greeting.content|escape }}</p>
+    </div>
+    </li>
+    {% endfor %}
+    {% endif %}
+</ul>
+{% endblock %}
+
+{% block body_end_script %}
+<script>
+    (function($) {
+        $("#more").click(function(){$("#greetings").toggle();});
+        $("#greetings").hide();
+    })(jQuery);
+</script>
+{% endblock %}

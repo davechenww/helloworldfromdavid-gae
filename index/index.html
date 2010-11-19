@@ -1,0 +1,18 @@
+{% extends "../templates/base.html" %}
+
+{% block title %}
+"Hello, World!" from David
+{% endblock %}
+
+{% block header_content %}
+<h1>Welcome to my space!</h1> 
+{% endblock %}
+
+{% block content_content %}
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Projects</li>
+    <li><a href="/guestbook/">Guest Book</a></li>
+    <li><a href="/android/">Android Developer site mirror</a></li>
+    <li><a href="/roadmap/">Roadmaps</a></li>
+</ul>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
+        {% block header_css_include %}{% endblock header_css_include %}
+        {% block header_js_include %}{% endblock header_js_include %}
+    </head> 
+    <body> 
+
+        <div data-role="page" data-theme="b">
+        {% block page %}
+            {% block header %}
+            <div data-role="header">
+                {% block header_content %}
+                {% endblock %}
+            </div><!-- /header -->
+            {% endblock %}
+
+            {% block content %}
+            <div data-role="content">   
+                {% block content_content %}
+                {% endblock %}
+            </div><!-- /content -->
+            {% endblock %}
+
+            {% block footer %}
+            <div data-role="footer">
+                {% block footer_content %}
+                {% endblock %}
+                <h4>
+                    Powered by
+                    <a href="http://code.google.com/appengine/">Google App Engine</a>,
+                    <a href="http://jquerymobile.com/">JQuery Mobile</a>.
+                    Version 0.1.2
+                </h4>
+            </div><!-- /header -->
+            {% endblock %}
+        {% endblock %}
+        </div><!-- /page -->
+
+        {% block body_end_script %}{% endblock %}
+    </body>
+</html>
