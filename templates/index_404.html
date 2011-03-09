@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+404 NOT FOUND
+{% endblock %}
+
+{% block header_content %}
+<h1>404 NOT FOUND</h1> 
+{% endblock %}
+
+{% block content_content %}
+<p>
+    The requested URL <strong>{{ request_url }}</strong> was not found.
+</p>
+<a href="/" data-role="button" data-icon="home" data-theme="c">Go to HOME</a>
+{% endblock %}

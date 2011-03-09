@@ -2,9 +2,9 @@
 <html> 
     <head> 
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
-        <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" />
+        <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js"></script>
         {% block header_css_include %}{% endblock header_css_include %}
         {% block header_js_include %}{% endblock header_js_include %}
     </head> 
@@ -16,6 +16,9 @@
             <div data-role="header">
                 {% block header_content %}
                 {% endblock %}
+                {% if not is_index_page %}
+                    <a href="/" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right">Home</a> 
+                {% endif %}
             </div><!-- /header -->
             {% endblock %}
 
@@ -29,14 +32,21 @@
             {% block footer %}
             <div data-role="footer">
                 {% block footer_content %}
-                {% endblock %}
                 <h4>
-                    Powered by
-                    <a href="http://code.google.com/appengine/">Google App Engine</a>,
-                    <a href="http://jquerymobile.com/">JQuery Mobile</a>.
-                    Version 0.1.2
+                    Version 0.1.3
                 </h4>
-            </div><!-- /header -->
+                <center>
+                    <a href="http://code.google.com/appengine/"><img height="30"
+                            src="http://code.google.com/appengine/images/appengine-silver-120x30.gif"
+                            alt="Powered by Google App Engine"
+                            title="Powered by Google App Engine" /></a>
+                    <a href="http://jquerymobile.com/"><img height="30"
+                            src="http://cdn.jquery.net/mobile/wp-content/themes/jquery-mobile/images/jquery-mobile-logo.png"
+                            alt="jQuery Mobile"
+                            title="jQuery Mobile" /></a>
+                </center>
+                {% endblock %}
+            </div><!-- /footer -->
             {% endblock %}
         {% endblock %}
         </div><!-- /page -->

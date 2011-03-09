@@ -1,9 +1,9 @@
-import os
-
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
+
+from util import template
+
 
 class Greeting(db.Model):
     author = db.UserProperty()
@@ -12,9 +12,7 @@ class Greeting(db.Model):
 
 class Index(webapp.RequestHandler):
     def get(self):
-        greetings_query = Greeting.all().order('-date')
-        latest_greetings = greetings_query[:5]
-        more_greetings = greetings_query[5:greetings_query.count()]
+        greetings = Greeting.all().order('-date')[:5]
 
         if users.get_current_user():
             current_user = users.get_current_user()
@@ -26,15 +24,12 @@ class Index(webapp.RequestHandler):
             url_linktext = 'Login'
 
         template_values = {
-            'latest_greetings': latest_greetings,
-            'more_greetings': more_greetings,
+            'greetings': greetings,
             'current_user': current_user,
             'url': url,
             'url_linktext': url_linktext,
-            }
-
-        path = os.path.join(os.path.dirname(__file__), 'index.html')
-        self.response.out.write(template.render(path, template_values))
+        }
+        self.response.out.write(template.render('guestbook_index.html', template_values))
 
 class Sign(webapp.RequestHandler):
     def post(self):
@@ -46,4 +41,4 @@ class Sign(webapp.RequestHandler):
         greeting.content = self.request.get('content')
         if greeting.content:
             greeting.put()
-        self.redirect('/')
+        self.redirect('/guestbook/')

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+GuestBook | "Hello, World!" from David
+{% endblock %}
+
+{% block header_content %}
+<h1>GuestBook</h1> 
+{% endblock %}
+
+{% block content_content %}
+<form action="/guestbook/sign/" method="post">
+    <fieldset>
+        <div data-role="fieldcontain">
+            <label for="content">
+                {% if current_user %}Hello {{ current_user.nickname }},{% endif %}
+                Say something to me:
+            </label>
+            <textarea id="content" name="content" rows="3" cols="60"></textarea>
+        </div>
+        <button type="submit" name="submit" value="submit-value">Sign GuestBook</button> 
+    </fieldset>
+</form>
+
+<ul data-role="listview" data-inset="true">
+    {% if greetings %}
+    <li data-role="list-divider">Latest Guest Notes</li>
+    {% for greeting in greetings %}
+    <li>
+        <h3>
+            {% if greeting.author %}{{ greeting.author.nickname }}{% else %}Anonymous{% endif %}
+        </h3>
+        <p>{{ greeting.content|escape }}</p>
+        <p class="ui-li-aside">{{ greeting.date|timesince }} ago</p>
+    </li>
+    {% endfor %}
+    {% else %}
+    <li data-role="list-divider">No guest notes. To be No.1!</li>
+    {% endif %}
+</ul>
+{% endblock %}

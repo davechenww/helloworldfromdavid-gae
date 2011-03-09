@@ -19,3 +19,4 @@ skip_files:
 - ^(.*/)?\..*
 - ^(.*/)?.*\.bak$
 - ^(.*/)?.*\.gitignore$
+- ^(.*/)?local_settings\.py$

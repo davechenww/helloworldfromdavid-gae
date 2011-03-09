@@ -1,10 +1,8 @@
-import os
 import re
 import urlparse
 
 from google.appengine.api import urlfetch
 from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
 
 BASE_URL = 'http://developer.android.com/'
 
