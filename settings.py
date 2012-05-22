@@ -1,5 +1,7 @@
 DEBUG = False
 
+HOST_URL = '/'
+
 import os
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 TEMPLATE_DIRS = (

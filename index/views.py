@@ -1,5 +1,6 @@
 from google.appengine.ext import webapp
 
+import util
 from util import template
 
 
@@ -13,6 +14,11 @@ class Http404(webapp.RequestHandler):
         }
         self.response.set_status(404)
         self.response.out.write(template.render('index_404.html', template_values))
+
+class Proxy(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+        self.response.out.write(util.dump_request(self.request))
 
 class Index(webapp.RequestHandler):
     def get(self):
